@@ -14,5 +14,5 @@ Modo debug
 ```js
 npm install raspibeacon
 var raspibeacon = require('raspibeacon')
-raspibeacon.startScan("http://localhost:80", "endpoint/beacon");
+raspibeacon.startScanDebug("http://localhost:80", "endpoint/beacon");
 ```
