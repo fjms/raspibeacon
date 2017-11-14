@@ -22,12 +22,12 @@ Make sure ```node``` is on your path, if it's not, some options:
 ```js
 npm install raspibeacon
 var raspibeacon = require('raspibeacon')
-raspibeacon.startScan("http://localhost:80", "endpoint/beacon");
+raspibeacon.startScan("http://localhost:80", "/endpoint/beacon");
 ```
 
 Modo debug
 ```js
 npm install raspibeacon
 var raspibeacon = require('raspibeacon')
-raspibeacon.startScanDebug("http://localhost:80", "endpoint/beacon");
+raspibeacon.startScanDebug("http://localhost:80", "/endpoint/beacon");
 ```
