@@ -1,0 +1,17 @@
+{
+  "name": "raspibeacon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "sudo node main.js",
+    "test": "sudo node test.js"
+  },
+  "author": "fjms",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.19.1",
+    "noble": "^1.8.1",
+    "request": "^2.83.0"
+  }
+}
