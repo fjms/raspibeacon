@@ -75,7 +75,7 @@ prepareBeacon = function (mac, inOut) {
   }
   util.sendToServo(url, {
     dateTime: now.toDate(),
-    inOut: true,
+    inOut: inOut,
     uuid: mac
   });
 }
