@@ -43,16 +43,15 @@ module.exports = {
 
 noble.on('discover', function (device) {
   let uuid = device.uuid;
-  let mac = device.address;
-  let rssi = device.rssi;
+  let mac = device.address.toUpperCase();
   let adv = device.advertisement;
   if (adv.localName && adv.localName == filterName) {
     let date = new Date();
-    if (myDict[device.address] != null) {
-      myDict[mac] = createBeaconDao(device.address, date);
+    if (myDict[mac] != null) {
+      myDict[mac] = createBeaconDao(mac, date);
     } else {
-      myDict[device.address] = createBeaconDao(device.address, date);
-      prepareBeacon(device.address, true);
+      myDict[mac] = createBeaconDao(mac, date);
+      prepareBeacon(mac, true);
     }
   }
 
