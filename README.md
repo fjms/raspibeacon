@@ -44,5 +44,5 @@ let options = {
     endpoint: "/api/ionic/raspibeacons",
     timeout: 180000    
 }
-raspibeacon.startScanDebug("http://localhost:80", "/endpoint/beacon");
+raspibeacon.startScanDebug(options);
 ```
