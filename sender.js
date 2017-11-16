@@ -11,7 +11,7 @@ module.exports = {
     }
 };
 send = function (url, presence) {
-    request.post({ url: url, form: presence }, function (error, response, body) {
+    request({ url: url, body: presence, json: true, method: 'post' }, function (error, response, body) {
         if (require('./main').DEBUG) {
             console.log('error:', error); // Print the error if one occurred
             console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
