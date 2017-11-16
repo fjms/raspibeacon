@@ -1,6 +1,10 @@
 {
   "name": "raspibeacon",
-  "version": "1.0.3",
+  "version": "1.0.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fjms/raspibeacon.git"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
