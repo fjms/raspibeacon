@@ -1,6 +1,8 @@
 # Raspibeacon
 
-Escaneo de beacon ble Kontack enviando una peticion post a un endpoint
+Beacon low energy scanning program that sends a post request to an end point defined in the parameters.
+
+You can filter by beacons mark, define the time between beacon detection.
 
 ### Linux
 
@@ -18,16 +20,29 @@ Make sure ```node``` is on your path, if it's not, some options:
  * [install Node.js using the NodeSource package](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
 
 
+#### Usage
 
 ```js
 npm install raspibeacon
 var raspibeacon = require('raspibeacon')
-raspibeacon.startScan("http://localhost:80", "/endpoint/beacon");
+let options = {
+    brands: ['Kontakt'],
+    host: "http://10.148.144.104:3000",
+    endpoint: "/api/ionic/raspibeacons",
+    timeout: 180000    
+}
+raspibeacon.startScan(options);
 ```
 
 Modo debug
 ```js
 npm install raspibeacon
 var raspibeacon = require('raspibeacon')
+let options = {
+    brands: ['Kontakt','RadioLand iBeacon'],
+    host: "http://10.148.144.104:3000",
+    endpoint: "/api/ionic/raspibeacons",
+    timeout: 180000    
+}
 raspibeacon.startScanDebug("http://localhost:80", "/endpoint/beacon");
 ```

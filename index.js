@@ -1,10 +1,12 @@
 var main = require('./main');
 module.exports = {
-    startScan: function (host, endpoint) {
-        main.startScan(host, endpoint, false);
+    startScan: function (options) {
+        options.debug = false;
+        main.startScan(options);
     },
-    startScanDebug: function (host, endpoint) {
+    startScanDebug: function (options) {
         console.log("This is a message from startScanDebug");
-        main.startScan(host, endpoint, true);
+        options.debug = true;
+        main.startScan(options);
     }
 };
