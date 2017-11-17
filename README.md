@@ -29,12 +29,12 @@ let options = {
     brands: ['Kontakt'],
     host: "http://10.148.144.104:3000",
     endpoint: "/api/ionic/raspibeacons",
-    timeout: 180000    
+    timeout: 180000 // Time in milliseconds passed without detecting a beacon inside the action radius
 }
 raspibeacon.startScan(options);
 ```
 
-Modo debug
+##### Modo debug
 ```js
 npm install raspibeacon
 var raspibeacon = require('raspibeacon')
@@ -42,7 +42,8 @@ let options = {
     brands: ['Kontakt','RadioLand iBeacon'],
     host: "http://10.148.144.104:3000",
     endpoint: "/api/ionic/raspibeacons",
-    timeout: 180000    
+    timeout: 180000 // Time in milliseconds passed without detecting a beacon inside the action radius  
 }
 raspibeacon.startScanDebug(options);
 ```
+

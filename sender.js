@@ -4,7 +4,7 @@ var request = require('request');
 module.exports = {
     sendToServo: function (url, presence) {
         if (require('./main').DEBUG) {
-            console.log('Enviando a ' + url);
+            console.log('Sending to ' + url);
             console.log(presence);
         }
         send(url, presence);

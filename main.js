@@ -1,28 +1,17 @@
 var noble = require('noble');
 var moment = require('moment');
 var util = require('./sender');
-var now = moment();
 
 
-var myDict = {};
-var OPTIONS = {};
-let filterName = "Kontakt";
-var stateProcess;
-var url = "";
-var DEBUG = true;
-var INTERVAL;
-var TIMEOUT = 180000;
-
-// let options = {
-//   brands: ['Kontakt', 'Radioland iBeacon'],
-//   host: "http://10.148.144.104:3000",
-//   endpoint: "/api/ionic/raspibeacons",
-//   timeout: 180000,
-//   debug: true
-// }
+let myDict = {};
+let OPTIONS = {};
+let URL = "";
+let DEBUG = true;
+let INTERVAL;
+let TIMEOUT = 180000;
 
 
-// BUCLE PRINCIPAL
+// MAIN LOGIC
 module.exports = {
   startScan: function (options) {
     OPTIONS = options;
@@ -34,9 +23,8 @@ module.exports = {
     if (DEBUG)
       console.log('Start Raspibeacon');
     if (options.host && options.endpoint) {
-      url = options.host + options.endpoint;
+      URL = options.host + options.endpoint;
       noble.on('stateChange', function (state) {
-        stateProcess = state;
         if (state === 'poweredOn')
           noble.startScanning([], true);
         else
@@ -47,14 +35,14 @@ module.exports = {
         checkBeaconsOnExit();
       }, 30000);
     } else {
-      console.log('Error. Debe indicar parametros host y endpoint');
+      console.log('Error. You must specify host and endpoint options');
       console.log('let options = {host: "http://10.148.144.104:3000",endpoint: "/api/ionic/raspibeacons"}')
-      console.log('Ejemplo de uso: raspibeacon.startScan(options)');
+      console.log('Example of use: raspibeacon.startScan(options)');
       process.exit();
     }
   }
 };
-// FIN BUCLE PRINCIPAL
+// END MAIN LOGIC
 
 noble.on('discover', function (device) {
   let uuid = device.uuid;
@@ -64,10 +52,10 @@ noble.on('discover', function (device) {
     // FILTRAMOS POR MARCA
     let date = new Date();
     if (myDict[mac] != null) {
-      myDict[mac] = createBeaconDao(mac, date);
+      myDict[mac] = createBeaconJson(mac, date);
     } else {
-      myDict[mac] = createBeaconDao(mac, date);
-      prepareBeacon(mac, true);
+      myDict[mac] = createBeaconJson(mac, date);
+      prepareBeaconPresence(mac, true);
     }
   }
 
@@ -82,22 +70,22 @@ isfilterBrand = function (brand) {
   }
 }
 
-createBeaconDao = function (mac, date) {
+createBeaconJson = function (mac, date) {
   let device = {};
   device['mac'] = mac;
   device['date'] = date;
   return JSON.stringify(device);
 }
 
-prepareBeacon = function (mac, inOut) {
+prepareBeaconPresence = function (mac, inOut) {
   let now = moment();
-  let date = now.format('YYYY-MM-DD HH:mm:ss');
   if (DEBUG) {
+    let date = now.format('YYYY-MM-DD HH:mm:ss');
     console.clear();
-    console.log('Beacon detectado');
+    console.log('Beacon detected');
     console.log(date, 'mac:', mac);
   }
-  util.sendToServo(url, {
+  util.sendToServo(URL, {
     dateTime: now.toDate(),
     inOut: inOut,
     uuid: mac
@@ -111,9 +99,9 @@ checkBeaconsOnExit = function () {
       //let time = new Date(JSON.parse(this.myDict[key]).date).getTime();
       //console.log('key almacenada: ' + key + ' TimeStorage: ' + time + " Now:" + new Date().getTime());
       if (new Date().getTime() - new Date(JSON.parse(myDict[key]).date).getTime() > TIMEOUT) {
-        prepareBeacon(key, false);
+        prepareBeaconPresence(key, false);
         if (DEBUG)
-          console.log('Saliendo del radio de acción del beacon');
+          console.log('Beacon out of detection range');
         delete myDict[key];
       }
     });

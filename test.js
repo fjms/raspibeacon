@@ -6,7 +6,7 @@ let options = {
     brands: ['Kontakt'],
     host: "http://10.148.144.104:3000",
     endpoint: "/api/ionic/raspibeacons",
-    timeout: 180000,
+    timeout: 30000,
     debug: true
 }
 
