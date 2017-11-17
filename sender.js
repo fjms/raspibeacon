@@ -3,6 +3,7 @@ var request = require('request');
 
 module.exports = {
     sendToServo: function (url, presence) {
+        presence.id_device = require('./main').ID_DEVICE;
         if (require('./main').DEBUG) {
             console.log('Sending to ' + url);
             console.log(presence);

@@ -19,6 +19,7 @@ module.exports = {
     if (options.timeout) {
       TIMEOUT = options.timeout;
     }
+    module.exports.ID_DEVICE = getserial();
     module.exports.DEBUG = options.debug;
     if (DEBUG)
       console.log('Start Raspibeacon');
@@ -106,5 +107,14 @@ checkBeaconsOnExit = function () {
       }
     });
   }
+}
+
+getserial = function () {
+  let fs = require('fs');
+  let content = fs.readFileSync('/proc/cpuinfo', 'utf8');
+  let cont_array = content.split("\n");
+  let serial_line = cont_array[cont_array.length - 2];
+  let serial = serial_line.split(":");
+  return serial[1].slice(1);
 }
 
