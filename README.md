@@ -56,14 +56,14 @@ When a beacon is detected, a post request is sent to the server with the followi
 { dateTime: 2017-11-22T11:04:41.734Z,
   inOut: true,
   uuid: 'AA:BB:CC:DD:EE:FF',
-  id_device: '00000000xxxxxxx1' }
+  id_device: 'XXXXXXXXXXXXXXXX' }
 ```
 
 A post with the following structure is sent when a time passes without the beacon being detected, determined by the timeout param.
 
 ```js
-{ dateTime: 2017-11-22T11:04:41.734Z,
+{ dateTime: 2017-11-22T11:34:51.621Z,
   inOut: false,
   uuid: 'AA:BB:CC:DD:EE:FF',
-  id_device: '00000000xxxxxxx1' }
+  id_device: 'XXXXXXXXXXXXXXXX' }
 ```
