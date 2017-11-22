@@ -2,7 +2,7 @@
 
 Beacon low energy scanning program that sends a post request to an end point defined in the parameters.
 
-You can filter by beacons mark, define the time between beacon detection.
+You can filter by beacons brands, define the time between beacon detection.
 
 ### Linux
 
@@ -21,6 +21,24 @@ Make sure ```node``` is on your path, if it's not, some options:
 
 
 #### Usage
+
+When a beacon is detected, a post request is sent to the server with the following structure:
+
+```js
+{ dateTime: 2017-11-22T11:04:41.734Z,
+  inOut: true,
+  uuid: 'AA:BB:CC:DD:EE:FF',
+  id_device: '00000000xxxxxxx1' }
+```
+
+A post with the following structure is sent when a time passes without the beacon being detected, determined by the timeout param.
+
+```js
+{ dateTime: 2017-11-22T11:04:41.734Z,
+  inOut: false,
+  uuid: 'AA:BB:CC:DD:EE:FF',
+  id_device: '00000000xxxxxxx1' }
+```
 
 ```js
 npm install raspibeacon
