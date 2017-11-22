@@ -22,6 +22,34 @@ Make sure ```node``` is on your path, if it's not, some options:
 
 #### Usage
 
+```js
+npm install raspibeacon
+var raspibeacon = require('raspibeacon')
+let options = {
+    brands: ['Kontakt'],
+    host: "http://10.148.144.104:3000",
+    endpoint: "/api/ionic/raspibeacons",
+    timeout: 180000 // Time in milliseconds passed without detecting a beacon inside the action radius
+}
+raspibeacon.startScan(options);
+```
+
+##### Modo debug
+
+```js
+npm install raspibeacon
+var raspibeacon = require('raspibeacon')
+let options = {
+    brands: ['Kontakt','RadioLand iBeacon'],
+    host: "http://10.148.144.104:3000",
+    endpoint: "/api/ionic/raspibeacons",
+    timeout: 180000 // Time in milliseconds passed without detecting a beacon inside the action radius  
+}
+raspibeacon.startScanDebug(options);
+```
+
+#### Response
+
 When a beacon is detected, a post request is sent to the server with the following structure:
 
 ```js
@@ -39,29 +67,3 @@ A post with the following structure is sent when a time passes without the beaco
   uuid: 'AA:BB:CC:DD:EE:FF',
   id_device: '00000000xxxxxxx1' }
 ```
-
-```js
-npm install raspibeacon
-var raspibeacon = require('raspibeacon')
-let options = {
-    brands: ['Kontakt'],
-    host: "http://10.148.144.104:3000",
-    endpoint: "/api/ionic/raspibeacons",
-    timeout: 180000 // Time in milliseconds passed without detecting a beacon inside the action radius
-}
-raspibeacon.startScan(options);
-```
-
-##### Modo debug
-```js
-npm install raspibeacon
-var raspibeacon = require('raspibeacon')
-let options = {
-    brands: ['Kontakt','RadioLand iBeacon'],
-    host: "http://10.148.144.104:3000",
-    endpoint: "/api/ionic/raspibeacons",
-    timeout: 180000 // Time in milliseconds passed without detecting a beacon inside the action radius  
-}
-raspibeacon.startScanDebug(options);
-```
-
